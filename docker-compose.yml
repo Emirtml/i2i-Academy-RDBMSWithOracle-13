@@ -1,0 +1,24 @@
+version: '3.8'
+
+networks:
+  i2i-network:
+    driver: bridge
+
+services:
+  # 1. Konteyner: Resmi Oracle Database XE Veritabanı
+  oracle-db:
+    image: gvenzl/oracle-xe:21-slim
+    container_name: oracle-backend-db
+    ports:
+      - "1521:1521"
+    environment:
+      - ORACLE_PASSWORD=mysecurepassword
+      - APP_USER=i2i_user
+      - APP_PASSWORD=i2i_password
+    networks:
+      - i2i-network
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+
+volumes:
+  oracle-data:
