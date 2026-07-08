@@ -5,12 +5,11 @@ networks:
     driver: bridge
 
 services:
-  # 1. Konteyner: Resmi Oracle Database XE Veritabanı
   oracle-db:
     image: gvenzl/oracle-xe:21-slim
     container_name: oracle-backend-db
     ports:
-      - "1521:1521"
+      - "1533:1521"  # <-- Dış portu 1533 yaptık, iç port kurumsal kural gereği 1521 kaldı!
     environment:
       - ORACLE_PASSWORD=mysecurepassword
       - APP_USER=i2i_user
